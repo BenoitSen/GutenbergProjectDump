@@ -13,5 +13,17 @@ for subdir in subdir_list:
     print(ebook_id_list)
 
 # TODO: Download the books thanks to the ebook id
-#for ebook_id in ebook_id_list:
-#   text = strip_headers(load_etext(ebook_id)).strip()
+from gutenberg.acquire import load_etext
+from gutenberg.cleanup import strip_headers
+
+file = open('data_txt_gutenberg.txt', 'wb')
+i = 10
+for ebook_id in ebook_id_list:
+    text = strip_headers(load_etext(ebook_id)).strip()
+    file.write(text)  
+    i-=1
+    if i==0:
+        break
+print('End of dump')
+
+file.close()
